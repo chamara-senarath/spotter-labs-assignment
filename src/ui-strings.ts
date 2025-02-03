@@ -1,4 +1,5 @@
 export const UI_STRINGS = {
+  Search: "Search",
   WhereFrom: "Where from?",
   WhereTo: "Where to?",
   From: "From",
@@ -6,7 +7,6 @@ export const UI_STRINGS = {
   Flights: "Flights",
   RoundTrip: "Round trip",
   OneWay: "One-way",
-  MultiCity: "Multi-city",
   Adults: "Adults",
   Children: "Children",
   Aged: "Aged",

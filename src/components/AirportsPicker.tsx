@@ -6,22 +6,45 @@ import {
   InputAdornment,
 } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { UI_STRINGS } from "../ui-strings";
 import { useSearchAirport } from "../hooks/useSearchAirport";
 import debounce from "lodash.debounce";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { Airport } from "../types";
-
+import LocalAirportOutlinedIcon from "@mui/icons-material/LocalAirportOutlined";
 const { From, To, WhereFrom, WhereTo } = UI_STRINGS;
+
+enum FlightPlaceType {
+  AIRPORT = "AIRPORT",
+  CITY = "CITY",
+}
 
 type Option = Pick<Airport, "skyId"> &
   Pick<Airport["presentation"], "suggestionTitle"> &
-  Pick<Airport["navigation"]["relevantFlightParams"], "flightPlaceType">;
+  Pick<Airport["navigation"]["relevantFlightParams"], "flightPlaceType"> &
+  Pick<Airport["navigation"]["relevantFlightParams"], "entityId">;
 
-export const AirportsPicker = () => {
-  const [origin, setOrigin] = useState<Option | null>(null);
-  const [destination, setDestination] = useState<Option | null>(null);
+type Props = {
+  origin?: Option | null;
+  destination?: Option | null;
+  onChange: (origin: Option | null, destination: Option | null) => void;
+};
+
+export const AirportsPicker = (props: Props) => {
+  const {
+    origin: originProp = null,
+    destination: destinationProp = null,
+    onChange,
+  } = props;
+  const [origin, setOrigin] = useState<Option | null>(originProp);
+  const [destination, setDestination] = useState<Option | null>(
+    destinationProp
+  );
+
+  useEffect(() => {
+    onChange(origin, destination);
+  }, [origin, destination, onChange]);
 
   const [query, setQuery] = useState("");
 
@@ -34,6 +57,7 @@ export const AirportsPicker = () => {
       suggestionTitle: airportData.presentation.suggestionTitle,
       flightPlaceType:
         airportData.navigation.relevantFlightParams.flightPlaceType,
+      entityId: airportData.navigation.relevantFlightParams.entityId,
     }));
   }, [fromData]);
 
@@ -81,7 +105,16 @@ export const AirportsPicker = () => {
           />
         )}
         renderOption={(props, option) => (
-          <li {...props}>{option.suggestionTitle}</li>
+          <li {...props} key={option.entityId}>
+            <Box sx={{ display: "flex", gap: 1 }} alignItems={"center"}>
+              {option.flightPlaceType === FlightPlaceType.AIRPORT ? (
+                <LocalAirportOutlinedIcon />
+              ) : (
+                <PlaceOutlinedIcon />
+              )}
+              {option.suggestionTitle}
+            </Box>
+          </li>
         )}
         fullWidth
       />
@@ -117,7 +150,16 @@ export const AirportsPicker = () => {
           />
         )}
         renderOption={(props, option) => (
-          <li {...props}>{option.suggestionTitle}</li>
+          <li {...props} key={option.entityId}>
+            <Box sx={{ display: "flex", gap: 1 }} alignItems={"center"}>
+              {option.flightPlaceType === FlightPlaceType.AIRPORT ? (
+                <LocalAirportOutlinedIcon />
+              ) : (
+                <PlaceOutlinedIcon />
+              )}
+              {option.suggestionTitle}
+            </Box>
+          </li>
         )}
         fullWidth
       />

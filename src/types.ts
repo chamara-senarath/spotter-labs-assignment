@@ -31,3 +31,10 @@ interface RelevantHotelParams {
   entityType: string;
   localizedName: string;
 }
+
+export interface PassengerCounts {
+  adults: number;
+  children: number;
+  infantsInSeat: number;
+  infantsOnLap: number;
+}

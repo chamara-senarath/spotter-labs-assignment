@@ -19,6 +19,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
 import { UI_STRINGS } from "../ui-strings";
+import { PassengerCounts } from "../types";
 
 const {
   Adults,
@@ -29,24 +30,15 @@ const {
   First,
   Infants,
   InSeat,
-  MultiCity,
   OneWay,
   OnLap,
   PremiumEconomy,
   RoundTrip,
 } = UI_STRINGS;
 
-interface PassengerCounts {
-  adults: number;
-  children: number;
-  infantsInSeat: number;
-  infantsOnLap: number;
-}
-
 enum TripType {
   RoundTrip = "roundTrip",
   OneWay = "oneWay",
-  MultiCity = "multiCity",
 }
 
 enum CabinSeats {
@@ -119,7 +111,6 @@ const OptionsBar = () => {
         >
           <MenuItem value="roundTrip">{RoundTrip}</MenuItem>
           <MenuItem value="oneWay">{OneWay}</MenuItem>
-          <MenuItem value="multiCity">{MultiCity}</MenuItem>
         </Select>
       </FormControl>
 
