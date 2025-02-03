@@ -11,7 +11,7 @@ import {
   InputAdornment,
   OutlinedInput,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -48,7 +48,18 @@ enum CabinSeats {
   First = "first",
 }
 
-const OptionsBar = () => {
+type Props = {
+  onChange: ({
+    cabinClass,
+    passengers,
+  }: {
+    cabinClass: CabinSeats;
+    passengers: PassengerCounts;
+  }) => void;
+};
+const OptionsBar = (props: Props) => {
+  const { onChange } = props;
+
   const [tripType, setTripType] = useState(TripType.RoundTrip);
   const [passengers, setPassengers] = useState<PassengerCounts>({
     adults: 1,
@@ -59,6 +70,13 @@ const OptionsBar = () => {
   const [cabinClass, setCabinClass] = useState(CabinSeats.Economy);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    onChange({
+      cabinClass: cabinClass,
+      passengers: passengers,
+    });
+  }, [cabinClass, passengers]);
 
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
