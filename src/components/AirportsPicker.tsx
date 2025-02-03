@@ -8,7 +8,7 @@ import {
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { useEffect, useMemo, useState } from "react";
 import { UI_STRINGS } from "../ui-strings";
-import { useSearchAirport } from "../hooks/useSearchAirport";
+import { useSearchAirport } from "../hooks";
 import debounce from "lodash.debounce";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { Airport } from "../types";

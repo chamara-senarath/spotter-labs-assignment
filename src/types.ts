@@ -38,3 +38,85 @@ export interface PassengerCounts {
   infantsInSeat: number;
   infantsOnLap: number;
 }
+
+export interface SearchFlightsParams {
+  origin: {
+    skyId: string | undefined;
+    entityId: string | undefined;
+  };
+  destination: {
+    skyId: string | undefined;
+    entityId: string | undefined;
+  };
+  fromDate: Date | undefined;
+  toDate: Date | undefined;
+  cabinClass: string | undefined;
+  passengers: PassengerCounts;
+}
+
+export interface FlightData {
+  id: string;
+  price: Price;
+  legs: Leg[];
+  tags?: string[];
+  score: number;
+}
+
+interface Price {
+  raw: number;
+  formatted: string;
+  pricingOptionId: string;
+}
+
+interface Leg {
+  id: string;
+  origin: Origin;
+  destination: Destination;
+  durationInMinutes: number;
+  stopCount: number;
+  isSmallestStops: boolean;
+  departure: string;
+  arrival: string;
+  timeDeltaInDays: number;
+  carriers: Carriers;
+}
+
+interface Origin {
+  id: string;
+  entityId: string;
+  name: string;
+  displayCode: string;
+  city: string;
+  country: string;
+  isHighlighted: boolean;
+}
+
+interface Destination {
+  id: string;
+  entityId: string;
+  name: string;
+  displayCode: string;
+  city: string;
+  country: string;
+  isHighlighted: boolean;
+}
+
+interface Carriers {
+  marketing: Marketing[];
+  operating?: Operating[];
+  operationType: string;
+}
+
+interface Marketing {
+  id: number;
+  alternateId: string;
+  logoUrl: string;
+  name: string;
+}
+
+interface Operating {
+  id: number;
+  alternateId: string;
+  logoUrl: string;
+  name: string;
+}

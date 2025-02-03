@@ -4,30 +4,16 @@ import { AirportsPicker } from "./AirportsPicker";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { UI_STRINGS } from "../ui-strings";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { PassengerCounts } from "../types";
+import { SearchFlightsParams } from "../types";
+import { useSearchFlights } from "../hooks";
 
 const { Search } = UI_STRINGS;
 
-interface SearchParams {
-  origin: {
-    skyId: string | undefined;
-    entityId: string | undefined;
-  };
-  destination: {
-    skyId: string | undefined;
-    entityId: string | undefined;
-  };
-  fromDate: Date | undefined;
-  toDate: Date | undefined;
-  cabinClass: string | undefined;
-  passengers: PassengerCounts;
-}
-
 export const SearchBar = () => {
-  const searchParams = useRef<SearchParams>({
+  const searchParams = useRef<SearchFlightsParams>({
     origin: {
       skyId: undefined,
       entityId: undefined,
@@ -46,6 +32,29 @@ export const SearchBar = () => {
       infantsOnLap: 0,
     },
   });
+
+  const [params, setParams] = useState<SearchFlightsParams>(
+    searchParams.current
+  );
+
+  const { data } = useSearchFlights(params);
+  console.log(data);
+
+  const handleSearch = () => {
+    const { origin, destination, fromDate } = searchParams.current;
+    if (
+      !origin.entityId ||
+      !origin.skyId ||
+      !destination.entityId ||
+      !destination.skyId ||
+      !fromDate
+    ) {
+      return;
+    }
+    setParams({
+      ...searchParams.current,
+    });
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -76,7 +85,7 @@ export const SearchBar = () => {
           </LocalizationProvider>
         </Box>
       </Box>
-      <Button variant="contained">
+      <Button variant="contained" onClick={handleSearch}>
         <SearchOutlinedIcon />
         {Search}
       </Button>

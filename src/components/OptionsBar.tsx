@@ -43,7 +43,7 @@ enum TripType {
 
 enum CabinSeats {
   Economy = "economy",
-  PremiumEconomy = "premiumEconomy",
+  PremiumEconomy = "premium_economy",
   Business = "business",
   First = "first",
 }
