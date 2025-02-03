@@ -1,0 +1,16 @@
+export const UI_STRINGS = {
+  Flights: "Flights",
+  RoundTrip: "Round trip",
+  OneWay: "One-way",
+  MultiCity: "Multi-city",
+  Adults: "Adults",
+  Children: "Children",
+  Aged: "Aged",
+  Infants: "Infants",
+  InSeat: "In seat",
+  OnLap: "On lap",
+  Economy: "Economy",
+  PremiumEconomy: "Premium economy",
+  Business: "Business",
+  First: "First",
+};
