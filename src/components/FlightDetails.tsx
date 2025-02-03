@@ -68,8 +68,19 @@ export const FlightDetails = ({ flightData }: Props) => {
   };
 
   return (
-    <Box sx={{ p: 2, border: "1px solid #e0e0e0", borderRadius: 1 }}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+    <Box
+      sx={{
+        p: { xs: 1.5, sm: 2 },
+        border: "1px solid #e0e0e0",
+        borderRadius: 1,
+      }}
+    >
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        justifyContent="space-between"
+        alignItems={{ xs: "stretch", sm: "center" }}
+        spacing={{ xs: 2, sm: 0 }}
+      >
         <Stack direction="row" spacing={2} alignItems="center">
           <FlightTakeoffIcon color="primary" />
           <Stack>
@@ -82,7 +93,7 @@ export const FlightDetails = ({ flightData }: Props) => {
                 {SelfTransfer}
               </Typography>
             )}
-            <Box display={"flex"} gap={2}>
+            <Box display={"flex"} gap={2} flexWrap="wrap">
               {Array.from(flightCarriers).map((carrier) => (
                 <Typography
                   key={carrier as string}
@@ -96,22 +107,27 @@ export const FlightDetails = ({ flightData }: Props) => {
           </Stack>
         </Stack>
 
-        <Stack direction="row" spacing={4} alignItems="center">
-          <Box textAlign="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 2, sm: 4 }}
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          width={{ xs: "100%", sm: "auto" }}
+        >
+          <Box textAlign={{ xs: "left", sm: "center" }}>
             <Typography variant="body1">{totalDuration}</Typography>
             <Typography variant="body2" color="text.secondary">
               {fromAirport}-{toAirport}
             </Typography>
           </Box>
 
-          <Box textAlign="center">
+          <Box textAlign={{ xs: "left", sm: "center" }}>
             <Typography variant="body1">{formattedStops()}</Typography>
             <Typography variant="body2" color="text.secondary">
               {layoverAirports}
             </Typography>
           </Box>
 
-          <Box textAlign="right">
+          <Box textAlign={{ xs: "left", sm: "right" }}>
             <Typography variant="h6" fontWeight="bold">
               {flightData.price.formatted}
             </Typography>

@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import banner from "../assets/banner.png";
+import banner from "../assets/banner.jpeg";
 import { SearchBar } from "./SearchBar";
 import { useState } from "react";
 import { SearchFlightsParams } from "../types";
@@ -21,7 +21,7 @@ export const Home = () => {
           height: 300,
           width: "100%",
           objectFit: "cover",
-          objectPosition: "0 25%",
+          objectPosition: "0 30%",
           WebkitMaskImage:
             "radial-gradient(circle, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)",
           maskImage:
