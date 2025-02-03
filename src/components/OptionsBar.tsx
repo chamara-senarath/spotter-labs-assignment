@@ -20,7 +20,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
 import { UI_STRINGS } from "../ui-strings";
 import { PassengerCounts } from "../types";
-
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 const {
   Adults,
   Aged,
@@ -59,6 +59,7 @@ type Props = {
     passengers: PassengerCounts;
   }) => void;
 };
+
 const OptionsBar = (props: Props) => {
   const { onChange } = props;
 
@@ -124,7 +125,11 @@ const OptionsBar = (props: Props) => {
             <OutlinedInput
               startAdornment={
                 <InputAdornment position="start">
-                  <SyncAltOutlinedIcon />
+                  {tripType === TripType.OneWay ? (
+                    <ArrowRightAltIcon />
+                  ) : (
+                    <SyncAltOutlinedIcon />
+                  )}
                 </InputAdornment>
               }
             />
