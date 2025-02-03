@@ -8,7 +8,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { SearchFlightsParams } from "../types";
 import OptionsBar from "./OptionsBar";
 import { AirportsPicker } from "./AirportsPicker";
-
+import { DatePicker } from "@mui/x-date-pickers-pro";
 const { Search } = UI_STRINGS;
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
 
 export const SearchBar = ({ isLoading, onClickSearch }: Props) => {
   const [searchParams, setSearchParams] = useState<SearchFlightsParams>({
+    isOneWay: false,
     origin: {
       skyId: undefined,
       entityId: undefined,
@@ -51,16 +52,17 @@ export const SearchBar = ({ isLoading, onClickSearch }: Props) => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <OptionsBar
-        onChange={({ cabinClass, passengers }) => {
+        onChange={({ isOneWay, cabinClass, passengers }) => {
           setSearchParams((prev) => ({
             ...prev,
+            isOneWay,
             cabinClass,
             passengers,
           }));
         }}
       />
-      <Box sx={{ display: "flex", gap: 4 }} width={"100%"}>
-        <Box sx={{ display: "flex" }} flex={1}>
+      <Box display={"flex"} flexWrap={"wrap"} gap={4} width={"100%"}>
+        <Box display={"flex"} flex={1}>
           <AirportsPicker
             onChange={(origin, destination) => {
               setSearchParams((prev) => ({
@@ -77,17 +79,30 @@ export const SearchBar = ({ isLoading, onClickSearch }: Props) => {
             }}
           />
         </Box>
-        <Box sx={{ display: "flex" }} flex={1}>
+        <Box display={"flex"} flex={1}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateRangePicker
-              onChange={(dates) => {
-                setSearchParams((prev) => ({
-                  ...prev,
-                  fromDate: dates[0]?.format("YYYY-MM-DD"),
-                  toDate: dates[1]?.format("YYYY-MM-DD"),
-                }));
-              }}
-            />
+            {searchParams.isOneWay ? (
+              <DatePicker
+                label="Select Date"
+                onChange={(newValue) => {
+                  setSearchParams((prev) => ({
+                    ...prev,
+                    fromDate: newValue?.format("YYYY-MM-DD"),
+                    toDate: undefined,
+                  }));
+                }}
+              />
+            ) : (
+              <DateRangePicker
+                onChange={(dates) => {
+                  setSearchParams((prev) => ({
+                    ...prev,
+                    fromDate: dates[0]?.format("YYYY-MM-DD"),
+                    toDate: dates[1]?.format("YYYY-MM-DD"),
+                  }));
+                }}
+              />
+            )}
           </LocalizationProvider>
         </Box>
       </Box>

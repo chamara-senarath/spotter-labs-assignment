@@ -50,9 +50,11 @@ enum CabinSeats {
 
 type Props = {
   onChange: ({
+    isOneWay,
     cabinClass,
     passengers,
   }: {
+    isOneWay: boolean;
     cabinClass: CabinSeats;
     passengers: PassengerCounts;
   }) => void;
@@ -73,10 +75,11 @@ const OptionsBar = (props: Props) => {
 
   useEffect(() => {
     onChange({
+      isOneWay: tripType === TripType.OneWay,
       cabinClass: cabinClass,
       passengers: passengers,
     });
-  }, [cabinClass, passengers]);
+  }, [tripType, cabinClass, passengers]);
 
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -110,7 +113,7 @@ const OptionsBar = (props: Props) => {
   };
 
   return (
-    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+    <Box display={"flex"} gap={2} alignItems={"center"} flexWrap={"wrap"}>
       <FormControl sx={{ minWidth: 120 }}>
         <Select
           value={tripType}

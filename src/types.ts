@@ -40,6 +40,7 @@ export interface PassengerCounts {
 }
 
 export interface SearchFlightsParams {
+  isOneWay: boolean;
   origin: {
     skyId: string | undefined;
     entityId: string | undefined;

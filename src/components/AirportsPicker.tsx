@@ -1,11 +1,4 @@
-import {
-  Box,
-  IconButton,
-  Autocomplete,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import { Box, Autocomplete, TextField, InputAdornment } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { UI_STRINGS } from "../ui-strings";
 import { useSearchAirport } from "../hooks";
@@ -61,23 +54,12 @@ export const AirportsPicker = (props: Props) => {
     }));
   }, [fromData]);
 
-  const handleSwap = () => {
-    //TODO: Implement swap logic
-  };
-
   const debouncedSetQuery = debounce((value: string) => {
     setQuery(value);
   }, 300);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        width: "100%",
-      }}
-    >
+    <Box display={"flex"} alignItems={"center"} gap={2} width={"100%"}>
       <Autocomplete
         freeSolo
         loading={isLoading}
@@ -118,10 +100,6 @@ export const AirportsPicker = (props: Props) => {
         )}
         fullWidth
       />
-
-      <IconButton onClick={handleSwap} sx={{ mx: 1 }}>
-        <SwapHorizIcon />
-      </IconButton>
 
       <Autocomplete
         freeSolo
