@@ -1,4 +1,8 @@
 export const UI_STRINGS = {
+  WhereFrom: "Where from?",
+  WhereTo: "Where to?",
+  From: "From",
+  To: "To",
   Flights: "Flights",
   RoundTrip: "Round trip",
   OneWay: "One-way",
