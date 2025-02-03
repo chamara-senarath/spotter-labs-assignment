@@ -48,8 +48,8 @@ export interface SearchFlightsParams {
     skyId: string | undefined;
     entityId: string | undefined;
   };
-  fromDate: Date | undefined;
-  toDate: Date | undefined;
+  fromDate: string | undefined;
+  toDate: string | undefined;
   cabinClass: string | undefined;
   passengers: PassengerCounts;
 }
@@ -60,6 +60,7 @@ export interface FlightData {
   legs: Leg[];
   tags?: string[];
   score: number;
+  isSelfTransfer: boolean;
 }
 
 interface Price {
@@ -79,6 +80,13 @@ interface Leg {
   arrival: string;
   timeDeltaInDays: number;
   carriers: Carriers;
+  segments: Segment[];
+}
+
+interface Segment {
+  id: string;
+  origin: Origin;
+  destination: Destination;
 }
 
 interface Origin {
