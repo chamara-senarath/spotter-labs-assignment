@@ -12,8 +12,8 @@ export const useSearchAirport = (params: { query: string }) => {
       return result;
     },
     queryKey: ["search-airport", params.query],
-    // enabled: !!params.query,
-    enabled: false,
+    enabled: !!params.query,
+    retry: false,
   });
 
   if (error) {
@@ -23,9 +23,10 @@ export const useSearchAirport = (params: { query: string }) => {
   return { data, isLoading };
 };
 
-export const useSearchFlights = (params: SearchFlightsParams) => {
+export const useSearchFlights = (params: SearchFlightsParams | undefined) => {
   const { data, isLoading, error } = useQuery<FlightData[]>({
     queryFn: async () => {
+      if (!params) return [];
       const result = await searchFlights(params);
       if (!result) {
         throw new Error("No flight data found");
@@ -33,8 +34,8 @@ export const useSearchFlights = (params: SearchFlightsParams) => {
       return result;
     },
     queryKey: ["search-flights", params],
-    // enabled: !!params.query,
-    enabled: false,
+    retry: false,
+    enabled: !!params,
   });
 
   if (error) {

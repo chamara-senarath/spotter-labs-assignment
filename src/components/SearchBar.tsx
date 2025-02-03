@@ -12,10 +12,11 @@ import { AirportsPicker } from "./AirportsPicker";
 const { Search } = UI_STRINGS;
 
 type Props = {
+  isLoading: boolean;
   onClickSearch: (params: SearchFlightsParams) => void;
 };
 
-export const SearchBar = ({ onClickSearch }: Props) => {
+export const SearchBar = ({ isLoading, onClickSearch }: Props) => {
   const [searchParams, setSearchParams] = useState<SearchFlightsParams>({
     origin: {
       skyId: undefined,
@@ -94,6 +95,7 @@ export const SearchBar = ({ onClickSearch }: Props) => {
         variant="contained"
         onClick={handleSearch}
         disabled={disableSearch}
+        loading={isLoading}
       >
         <SearchOutlinedIcon />
         {Search}

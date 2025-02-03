@@ -44,7 +44,7 @@ export const AirportsPicker = (props: Props) => {
 
   useEffect(() => {
     onChange(origin, destination);
-  }, [origin, destination, onChange]);
+  }, [origin, destination]);
 
   const [query, setQuery] = useState("");
 

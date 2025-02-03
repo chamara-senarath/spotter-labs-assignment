@@ -12,9 +12,9 @@ const { Flights } = UI_STRINGS;
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, mb: 4 }}>
       <CssBaseline />
-      <AppBar position="relative" color="default" elevation={0}>
+      <AppBar position="sticky" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h5" color="primary" component="div">
             {Flights}

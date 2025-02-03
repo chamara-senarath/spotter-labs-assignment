@@ -45,7 +45,6 @@ export const searchFlights = async (
     adults: params.passengers.adults.toString() ?? "",
     childrens: params.passengers.children.toString() ?? "",
     infants: params.passengers.infantsInSeat.toString() ?? "",
-    limit: "10",
   });
 
   const url = `${apiURL}/flights/searchFlights?${searchParams}`;
