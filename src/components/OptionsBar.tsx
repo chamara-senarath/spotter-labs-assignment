@@ -56,7 +56,7 @@ enum CabinSeats {
   First = "first",
 }
 
-const SearchBar = () => {
+const OptionsBar = () => {
   const [tripType, setTripType] = useState(TripType.RoundTrip);
   const [passengers, setPassengers] = useState<PassengerCounts>({
     adults: 1,
@@ -297,4 +297,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default OptionsBar;
