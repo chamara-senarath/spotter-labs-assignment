@@ -1,8 +1,12 @@
 import { Paper } from "@mui/material";
 import banner from "../assets/banner.png";
 import OptionsBar from "./OptionsBar";
+import { useSearchAirport } from "../hooks/useSearchAirport";
 
 export const Home = () => {
+  const { data } = useSearchAirport({ query: "colombo" });
+
+  console.log(data);
   return (
     <>
       <img
